@@ -1,0 +1,60 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Suggestions
+{% endblock %}
+
+{% block main %}
+    <table class="table table-striped">ADD
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">Number</th>
+                <th scope="col">Name</th>
+                <th scope="col">Group1 Price</th>
+                <th scope="col">Group2 Shares</th>
+                <th scope="col">t</th>
+                <th scope="col">Suggestion Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for ex in ex_addsug %}
+                <tr>
+                    <th scope="row">{{ loop.index }}</th>
+                    <th> {{ ex.name }}</th>
+                    <td> {{ ex.group1 }} </td>
+                    <td> {{ ex.group2 }} </td>
+                    <td> {{ ex.t }} </td>
+                    <td> {{ ex.time }} </td>
+                    <td><form action="/addex" method="post"><button value="{{ ex.id }}" name="add" class="btn btn-primary" type="submit">Add</button></form></td>
+                    <td><form action="/deletesug" method="post"><button value="{{ ex.id }}" name="delete" class="btn btn-danger" type="submit">Delete</button></form></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <table class="table table-striped">REPLACE
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">Number</th>
+                <th scope="col">Name</th>
+                <th scope="col">Group1 Price</th>
+                <th scope="col">Group2 Shares</th>
+                <th scope="col">t</th>
+                <th scope="col">Suggestion Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for ex_new, ex_old in ex_updatelist: %}
+                <tr>
+                    <th scope="row">{{ loop.index }}</th>
+                    <th> {{ ex_new.name }} <br><small> {{ ex_old.name }} </small></th>
+                    <td> {{ ex_new.group1 }} <br><small> {{ ex_old.group1 }} </small></td>
+                    <td> {{ ex_new.group2 }} <br><small> {{ ex_old.group2 }} </small></td>
+                    <td> {{ ex_new.t }} <br><small> {{ ex_old.t }} </small></td>
+                    <td> {{ ex_new.time }} <br><small> {{ ex_old.time }} </small></td>
+                    <td><form action="/updateex" method="post"><button value="{{ ex_new.id }}" name="update" class="btn btn-primary" type="submit">Update</button></form></td>
+                    <td><form action="/deletesug" method="post"><button value="{{ ex_new.id }}" name="delete" class="btn btn-danger" type="submit">Delete</button></form></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

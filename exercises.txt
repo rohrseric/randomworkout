@@ -1,0 +1,29 @@
+1,back squat,legs,legs,1
+2,bench press,chest,triceps,1
+3,front squat,legs,abdominals,1
+4,deadlift,back,hamstrings,1
+5,overhead press,shoulders,triceps,1
+6,2" deficit deadlift,back,hamstrings,2
+7,single leg press,legs,quads,2
+8,chest supported row,back,biceps,2
+9,v grip cable row,back,biceps,3
+10,leg curl,legs,hamstrings,3
+11,leg extension,legs,quads,3
+12,sissy squat,legs,quads,3
+13,dumbell hammer curl,biceps,biceps,3
+14,close grip bench,triceps,chest,2
+15,incline bench,chest,shoulders,2
+16,dumbell shoulder press,shoulders,triceps,2
+17,machine lateral raise,shoulders,shoulders,3
+18,rear delt fly,back,back,3
+19,pec flye,chest,chest,3
+20,cable tricep push down,triceps,triceps,3
+21,romanian deadlift,hamstrings,back,2
+22,back step lunge,legs,quads,2
+23,v grip lat pull down,back,lats,2
+24,wide grip lat pull down,lats,back,3
+25,ez bar curl,biceps,biceps,3
+26,slingshot bench,chest,triceps,2
+27,legs up bench,chest,triceps,2
+28,push press,shoulders,triceps,2
+29,cable overhead tricep extension,triceps,triceps,3

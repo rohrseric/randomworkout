@@ -1,0 +1,4 @@
+CREATE TABLE 'exercises' ('name' TEXT NOT NULL, 'group1' TEXT NOT NULL, 'group2' TEXT NOT NULL, 't' INTEGER NOT NULL)
+CREATE TABLE 'exercises' ('id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 'name' TEXT NOT NULL, 'group1' TEXT NOT NULL, 'group2' TEXT NOT NULL, 't' INTEGER NOT NULL)
+.separator ","
+.import exercises.txt exercises

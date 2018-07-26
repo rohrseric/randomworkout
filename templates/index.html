@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Display
+{% endblock %}
+
+{% block main %}
+
+    <div id="buttons" class="container-fluid">
+        <button type="button" value="squat" class="btn btn-primary ex_button">Squat</button>
+        <button type="button" value="bench" class="btn btn-primary ex_button">Bench</button>
+        <button type="button" value="deadlift" class="btn btn-primary ex_button">Deadlift</button>
+        <button type="button" value="press" class="btn btn-primary ex_button">Press</button>
+    </div>
+    <div id="exlist" class="container-fluid">
+        <ul></ul>
+    </div>
+
+{% endblock %}

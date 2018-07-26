@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    All Exercises
+{% endblock %}
+
+{% block main %}
+    <table class="table table-striped">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">Number</th>
+                <th scope="col">Name</th>
+                <th scope="col">Group1</th>
+                <th scope="col">Group2</th>
+                <th scope="col">t</th>
+                <th scope="col">Date Added</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for ex in exs %}
+                <tr>
+                    <th scope="row">{{ loop.index }}</th>
+                    <th> {{ ex.name }}</th>
+                    <td> {{ ex.group1 }} </td>
+                    <td> {{ ex.group2 }} </td>
+                    <td> {{ ex.t }} </td>
+                    <td> {{ ex.time }} </td>
+                    <td><form action="/edit" method="post"> <button value="{{ ex.id }}" name="edit" class="btn btn-primary" type="submit">Edit</button></form></td>
+                    {% if role == 'Admin' %}
+                        <td><form action="/delete" method="post"><button value="{{ ex.id }}" name="delete" class="btn btn-danger" type="submit">Delete</button></form></td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
