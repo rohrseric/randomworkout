@@ -252,8 +252,9 @@ def button_pressed():
     t1ex = t1name(ex_day)
     exs = Exercise.query.filter_by(name=t1ex).all()
     # exs = db.execute("SELECT * FROM exercises WHERE name = '" + t1ex + "'")
-    result = [r for r, in exs]
-    print(result)
+    
+    print(exs)
+    
     # Lookup t2/t3 muscle groups
     acc_muscles = muscle_groups(ex_day)
     allt2=[]
