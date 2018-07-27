@@ -353,12 +353,12 @@ def add():
         # Check if adding edit suggestion or add suggestions
         if not request.form.get("replace_id"):
             # Insert Add suggestion
-            # Check if exercise exists in DB
-            name = Exercise.query.filter(and_(Exercise.name == request.form.get("name").lower(), Exercise.t == request.form.get("t")))
+            # Check if exercise exists in DB, get the number of exercises with that name
+            n_exs = Exercise.query.filter(and_(Exercise.name == request.form.get("name").lower(), Exercise.t == request.form.get("t"))).count()
             # name = db.execute("SELECT * FROM exercises WHERE name = :name AND t = :t",
             #                   name=request.form.get("name").lower(),
             #                   t=request.form.get("t"))
-            if name:
+            if n_exs > 0:
                 return apology("exercise exists", 400)
             else:
                 new_suggestion = Suggestion(name=request.form.get("name").lower(),
