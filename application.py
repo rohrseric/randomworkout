@@ -313,8 +313,9 @@ def button_pressed():
             "t": ex.t
         }])
     print(json_exs)
-    
-    json_test = jsonify(json_list=[i.serialize for i in exs])
+    json_list=[i.serialize for i in exs]
+    print(json_list)
+    json_test = jsonify(json_list)
     print(json_test)
     return json_test
     # return jsonify(exs)
