@@ -32,11 +32,10 @@ class User(db.Model):
     exercises = db.relationship('Exercise', backref='user', lazy=True)
     suggestions = db.relationship('Suggestion', backref='user', lazy=True)
     
-    def __init__(self, username, hash, role, time):
+    def __init__(self, username, hash, role):
         self.username = username
         self.hash = hash
         self.role = role
-        self.time = time
 
 
 class Exercise(db.Model):
@@ -49,13 +48,12 @@ class Exercise(db.Model):
     time = db.Column(db.DateTime, default=datetime.utcnow)
     sugestions = db.relationship('Suggestion', backref='exercise', lazy=True)
     
-    def __init__(self, name, group1, group2, t, user_id, time):
+    def __init__(self, name, group1, group2, t, user_id):
         self.name = name
         self.group1 = group1
         self.group2 = group2
         self.t = t
         self.user_id = user_id
-        self.time = time
 
 class Suggestion(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -67,13 +65,12 @@ class Suggestion(db.Model):
     time = db.Column(db.DateTime, default=datetime.utcnow)
     exercise_id = db.Column(db.Integer, db.ForeignKey('exercise.id'), nullable=False)
     
-    def __init__(self, name, group1, group2, t, user_id, time, exercise_id = None):
+    def __init__(self, name, group1, group2, t, user_id, exercise_id = None):
         self.name = name
         self.group1 = group1
         self.group2 = group2
         self.t = t
         self.user_id = user_id
-        self.time = time
         self.exercise_id = exercise_id
 
 # Ensure responses aren't cached
@@ -193,7 +190,7 @@ def register():
         
         # Remember which user has logged in
         session["user_id"] = new_user.id
-        session["role"] = role
+        session["role"] = new_user.role
         # session["user_id"] = id
 
         # Redirect user to home page
@@ -238,7 +235,8 @@ def button_pressed():
     acc_muscles = muscle_groups(ex_day)
     allt2=[]
     # query = "SELECT * FROM exercises WHERE "
-    for ind, muscle in enumerate(acc_muscles["t2"]):
+    # for ind, muscle in enumerate(acc_muscles["t2"]):
+    for muscle in acc_muscles["t2"]:
         allt2.extend(Exercise.query.filter(and_(Exercise.group1==muscle, Exercise.t==2)))
         # query += "(group1 = '" + muscle + "' AND t = 2)"
         # if ind != len(acc_muscles["t2"]) - 1:
@@ -255,7 +253,8 @@ def button_pressed():
     
     allt3 = []
     # query = "SELECT * FROM exercises WHERE "
-    for ind, muscle in enumerate(acc_muscles["t3"]):
+    # for ind, muscle in enumerate(acc_muscles["t3"]):
+    for muscle in acc_muscles["t3"]:
         allt3.extend(Exercise.query.filter(and_(Exercise.group1==muscle, Exercise.t==3)))
         # query += "(group1 = '" + muscle + "' AND t = 3)"
         # if ind != len(acc_muscles["t3"]) - 1:
@@ -296,10 +295,10 @@ def suggestions():
     """View and approve/delete suggestions from suggestion table"""
     # Get the suggestions
     
-    ex_addsug = Suggestion.query.filter_by(exercise_id == None)
+    ex_addsug = Suggestion.query.filter(Suggestion.exercise_id == None)
     # ex_addsug = db.execute("SELECT * FROM suggestions WHERE replace_id IS NULL")
     
-    ex_updatesug = Suggestion.query.filter_by(exercise_id != None)
+    ex_updatesug = Suggestion.query.filter(Suggestion.exercise_id != None)
     # ex_updatesug = db.execute("SELECT * FROM suggestions WHERE replace_id IS NOT NULL")
     ex_oldlist = []
     for ex in ex_updatesug:
@@ -359,7 +358,7 @@ def add():
                                             group2=request.form.get("group2").lower(),
                                             t=request.form.get("t"),
                                             user_id=session["user_id"],
-                                            replace_id=request.form.get("replace_id"))
+                                            exercise_id=request.form.get("replace_id"))
             db.session.add(new_suggestion)
             db.session.commit()
             # db.execute("INSERT INTO suggestions (name, group1, group2, t, user_id, replace_id) VALUES(:name, :group1, :group2, :t, :user_id, :replace_id)",
