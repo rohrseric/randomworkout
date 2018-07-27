@@ -125,6 +125,7 @@ def login():
         rows = User.query.filter_by(username=request.form.get("username"))
         # db.execute("SELECT * FROM users WHERE username = :username",
         #                   username=request.form.get("username"))
+        print(rows)
         if rows:
             print("Exists")
         else:
