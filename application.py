@@ -184,7 +184,7 @@ def register():
         # Ensure username does not exist and passwords match
         print("Number of people with that username")
         print(n_users)
-        if n_user > 0:
+        if n_users > 0:
             return apology("Username already exists", 400)
 
         if request.form.get("password") != request.form.get("confirmation"):
