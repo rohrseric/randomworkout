@@ -26,7 +26,7 @@
                     <td> {{ ex.t }} </td>
                     <td> {{ ex.time }} </td>
                     <td><form action="/edit" method="post"> <button value="{{ ex.id }}" name="edit" class="btn btn-primary" type="submit">Edit</button></form></td>
-                    {% if role == 'Admin' %}
+                    {% if session.role == 'Admin' %}
                         <td><form action="/delete" method="post"><button value="{{ ex.id }}" name="delete" class="btn btn-danger" type="submit">Delete</button></form></td>
                     {% endif %}
                 </tr>
