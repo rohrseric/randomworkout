@@ -239,7 +239,7 @@ def button_pressed():
     allt2=[]
     # query = "SELECT * FROM exercises WHERE "
     for ind, muscle in enumerate(acc_muscles["t2"]):
-        allt2.extend(Exercise.query.filter(and_(Exercise.group1=muscle, Exercise.t=2)))
+        allt2.extend(Exercise.query.filter(and_(Exercise.group1==muscle, Exercise.t==2)))
         # query += "(group1 = '" + muscle + "' AND t = 2)"
         # if ind != len(acc_muscles["t2"]) - 1:
         #     query += " OR "
@@ -256,7 +256,7 @@ def button_pressed():
     allt3 = []
     # query = "SELECT * FROM exercises WHERE "
     for ind, muscle in enumerate(acc_muscles["t3"]):
-        allt3.extend(Exercise.query.filter(and_(Exercise.group1=muscle, Exercise.t=3)))
+        allt3.extend(Exercise.query.filter(and_(Exercise.group1==muscle, Exercise.t==3)))
         # query += "(group1 = '" + muscle + "' AND t = 3)"
         # if ind != len(acc_muscles["t3"]) - 1:
         #     query += " OR "
@@ -332,7 +332,7 @@ def add():
         if not request.form.get("replace_id"):
             # Insert Add suggestion
             # Check if exercise exists in DB
-            name = Exercise.query.filter(and_(Exercise.name = request.form.get("name").lower(), Exercise.t = request.form.get("t")))
+            name = Exercise.query.filter(and_(Exercise.name == request.form.get("name").lower(), Exercise.t == request.form.get("t")))
             # name = db.execute("SELECT * FROM exercises WHERE name = :name AND t = :t",
             #                   name=request.form.get("name").lower(),
             #                   t=request.form.get("t"))
