@@ -45,7 +45,7 @@
                         <li class="nav-item"><a class="nav-link" href="/">Workout</a></li>
                         <li class="nav-item"><a class="nav-link" href="/add">Add</a></li>
                         <li class="nav-item"><a class="nav-link" href="/allex">All</a></li>
-                        {% if role == 'Admin' %}
+                        {% if session.role == 'Admin' %}
                             <li class="nav-item"><a class="nav-link" href="/suggestions">Suggestions</a></li>
                         {% endif %}
                         <li class="nav-item"><a class="nav-link" href="http://swoleateveryheight.blogspot.com/2014/07/the-gzcl-method-simplified_13.html" target="_blank">GZCL</a></li>

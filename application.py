@@ -236,7 +236,7 @@ def index():
     else:
         role = None
 
-    return render_template("index.html", role=role)
+    return render_template("index.html")
 
 
 @app.route("/button_pressed")
