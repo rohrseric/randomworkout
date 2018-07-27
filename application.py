@@ -90,13 +90,12 @@ class Suggestion(db.Model):
     time = db.Column(db.DateTime, default=datetime.utcnow)
     exercise_id = db.Column(db.Integer, db.ForeignKey('exercise.id'))
     
-    def __init__(self, name, group1, group2, t, user_id, exercise_id = None):
+    def __init__(self, name, group1, group2, t, user_id):
         self.name = name
         self.group1 = group1
         self.group2 = group2
         self.t = t
         self.user_id = user_id
-        self.exercise_id = exercise_id
 
 # Ensure responses aren't cached
 @app.after_request
@@ -366,6 +365,7 @@ def add():
                                             group2=request.form.get("group2").lower(),
                                             t=request.form.get("t"),
                                             user_id=session["user_id"])
+
                 db.session.add(new_suggestion)
                 db.session.commit()
                 # db.execute("INSERT INTO suggestions (name, group1, group2, t, user_id) VALUES(:name, :group1, :group2, :t, :user_id)",
