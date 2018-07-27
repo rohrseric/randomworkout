@@ -322,7 +322,8 @@ def suggestions():
     # ex_addsug = db.execute("SELECT * FROM suggestions WHERE replace_id IS NULL")
     
     ex_updatesug = Suggestion.query.filter(Suggestion.exercise_id != None)
-    print(ex_updatesug.id)
+    test = ex_updatesug.all()
+    print(test.id)
     # ex_updatesug = db.execute("SELECT * FROM suggestions WHERE replace_id IS NOT NULL")
     ex_oldlist = []
     for ex in ex_updatesug.all():
