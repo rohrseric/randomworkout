@@ -250,7 +250,7 @@ def button_pressed():
 
     # Lookup t1 exercise name
     t1ex = t1name(ex_day)
-    exs = Exercise.query.filter_by(name=t1ex)
+    exs = Exercise.query.filter_by(name=t1ex).all()
     # exs = db.execute("SELECT * FROM exercises WHERE name = '" + t1ex + "'")
     result = [r for r, in exs]
     print(result)
@@ -260,7 +260,7 @@ def button_pressed():
     # query = "SELECT * FROM exercises WHERE "
     # for ind, muscle in enumerate(acc_muscles["t2"]):
     for muscle in acc_muscles["t2"]:
-        allt2.extend(Exercise.query.filter(and_(Exercise.group1==muscle, Exercise.t==2)))
+        allt2.extend(Exercise.query.filter(and_(Exercise.group1==muscle, Exercise.t==2)).all())
         # query += "(group1 = '" + muscle + "' AND t = 2)"
         # if ind != len(acc_muscles["t2"]) - 1:
         #     query += " OR "
@@ -278,7 +278,7 @@ def button_pressed():
     # query = "SELECT * FROM exercises WHERE "
     # for ind, muscle in enumerate(acc_muscles["t3"]):
     for muscle in acc_muscles["t3"]:
-        allt3.extend(Exercise.query.filter(and_(Exercise.group1==muscle, Exercise.t==3)))
+        allt3.extend(Exercise.query.filter(and_(Exercise.group1==muscle, Exercise.t==3)).all())
         # query += "(group1 = '" + muscle + "' AND t = 3)"
         # if ind != len(acc_muscles["t3"]) - 1:
         #     query += " OR "
