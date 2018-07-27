@@ -15,7 +15,7 @@ $(document).ready(function() {
                     '<div class="col">' + row.t + '</div></div></li>';
                 });
             } else {
-                contentString = 'No Exercises';
+                contentString += '<li class="list-group-item"><div class="row"><div class="col">No Exercises</div></div></li>';
             }
             contentString += '</ul>';
 
