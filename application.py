@@ -132,7 +132,7 @@ def login():
         # Ensure username exists and password is correct
         if n_rows != 1 or not check_password_hash(row.hash, request.form.get("password")):
             return apology("invalid username and/or password", 403)
-
+            
         # Remember which user has logged in
         session["user_id"] = row.id
         session["role"] = row.role
