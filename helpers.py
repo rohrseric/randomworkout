@@ -1,11 +1,6 @@
 import os
-from cs50 import SQL
 from flask import redirect, render_template, request, session
 from functools import wraps
-
-
-# Configure CS50 Library to use SQLite database
-db = SQL("sqlite:///project.db")
 
 
 def apology(message, code=400):
@@ -48,8 +43,10 @@ def admin_required(f):
     def decorated_function(*args, **kwargs):
         if session.get("user_id") is None:
             return redirect("/login")
-        role = db.execute("SELECT role FROM users WHERE id = " + str(session.get("user_id")))
-        if role[0]["role"] != "Admin":
+            
+        # role = db.execute("SELECT role FROM users WHERE id = " + str(session.get("user_id")))
+        # if role[0]["role"] != "Admin":
+        if session.get("role") != "Admin":
             return redirect("/")
         return f(*args, **kwargs)
     return decorated_function
