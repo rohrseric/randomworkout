@@ -292,10 +292,17 @@ def button_pressed():
     else:
         rand_ind = random.sample(range(0, len(allt3)), 4)
         exs.extend([ex for i, ex in enumerate(allt3) if i in rand_ind])
-
-    return jsonify(exs)
-
-
+    
+    json_exs = []
+    for ex in exs:
+        json_exs.extend([{
+            "name": ex.name,
+            "t": ex.t
+        }])
+    print(json_exs)
+    return json_exs
+    # return jsonify(exs)
+    
 @app.route("/allex")
 @login_required
 def allex():
