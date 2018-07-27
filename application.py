@@ -71,8 +71,7 @@ class Exercise(db.Model):
     t = db.Column(db.Integer, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     time = db.Column(db.DateTime, default=datetime.utcnow)
-    sugestions = db.relationship('Suggestion', backref='exercise', lazy=True)
-    
+
     def __init__(self, name, group1, group2, t, user_id):
         self.name = name
         self.group1 = group1
@@ -88,14 +87,15 @@ class Suggestion(db.Model):
     t = db.Column(db.Integer, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     time = db.Column(db.DateTime, default=datetime.utcnow)
-    exercise_id = db.Column(db.Integer, db.ForeignKey('exercise.id'))
+    exercise_id = db.Column(db.Integer, nullable=True)
     
-    def __init__(self, name, group1, group2, t, user_id):
+    def __init__(self, name, group1, group2, t, user_id, exercise_id = None):
         self.name = name
         self.group1 = group1
         self.group2 = group2
         self.t = t
         self.user_id = user_id
+        self.exercise_id = exercise_id
 
 # Ensure responses aren't cached
 @app.after_request
