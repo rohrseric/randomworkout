@@ -121,7 +121,7 @@ def login():
         elif not request.form.get("password"):
             return apology("must provide password", 403)
 
-        # Query database for username
+        # Query database for username and the number of users with that username
         n_rows = User.query.filter_by(username=request.form.get("username")).count()
         row = User.query.filter_by(username=request.form.get("username")).first()
         # db.execute("SELECT * FROM users WHERE username = :username",
@@ -176,13 +176,15 @@ def register():
         elif not request.form.get("confirmation"):
             return apology("must provide password confirmation", 400)
 
-        # Query database for username
-        result = User.query.filter_by(username = request.form.get("username"))
+        # Query database for number of people with that username
+        n_users = User.query.filter_by(username = request.form.get("username")).count()
         # result = db.execute("SELECT * FROM users WHERE username = :username",
         #                     username=request.form.get("username"))
 
         # Ensure username does not exist and passwords match
-        if result:
+        print("Number of people with that username")
+        print(n_users)
+        if n_user > 0:
             return apology("Username already exists", 400)
 
         if request.form.get("password") != request.form.get("confirmation"):
