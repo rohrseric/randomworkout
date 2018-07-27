@@ -88,7 +88,7 @@ class Suggestion(db.Model):
     t = db.Column(db.Integer, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     time = db.Column(db.DateTime, default=datetime.utcnow)
-    exercise_id = db.Column(db.Integer, db.ForeignKey('exercise.id'), nullable=False)
+    exercise_id = db.Column(db.Integer, db.ForeignKey('exercise.id'))
     
     def __init__(self, name, group1, group2, t, user_id, exercise_id = None):
         self.name = name
