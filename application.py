@@ -32,13 +32,12 @@ class User(db.Model):
     exercises = db.relationship('Exercise', backref='user', lazy=True)
     suggestions = db.relationship('Suggestion', backref='user', lazy=True)
     
-    # def __init__(self, username, hash, role, time, exercises, suggestions):
-    #     self.username = username
-    #     self.hash = hash
-    #     self.role = role
-    #     self.time = time
-    #     self.exercises = exercises
-    #     self.suggestions = suggestions
+    def __init__(self, username, hash, role, time):
+        self.username = username
+        self.hash = hash
+        self.role = role
+        self.time = time
+
 
 class Exercise(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -49,14 +48,14 @@ class Exercise(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     time = db.Column(db.DateTime, default=datetime.utcnow)
     sugestions = db.relationship('Suggestion', backref='exercise', lazy=True)
-    # def __init__(self, name):
-    #     self.name = name
-    #     self.group1 = group1
-    #     self.group2 = group2
-    #     self.t = t
-    #     self.user_id = user_id
-    #     self.time = time
-    #     self.suggestions = suggestions
+    
+    def __init__(self, name, group1, group2, t, user_id, time):
+        self.name = name
+        self.group1 = group1
+        self.group2 = group2
+        self.t = t
+        self.user_id = user_id
+        self.time = time
 
 class Suggestion(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -68,9 +67,14 @@ class Suggestion(db.Model):
     time = db.Column(db.DateTime, default=datetime.utcnow)
     exercise_id = db.Column(db.Integer, db.ForeignKey('exercise.id'), nullable=False)
     
-    # def __init__(self, name):
-    #     self.name = name
-
+    def __init__(self, name, group1, group2, t, user_id, time, exercise_id = None):
+        self.name = name
+        self.group1 = group1
+        self.group2 = group2
+        self.t = t
+        self.user_id = user_id
+        self.time = time
+        self.exercise_id = exercise_id
 
 # Ensure responses aren't cached
 @app.after_request
