@@ -9,7 +9,7 @@ from tempfile import mkdtemp
 from werkzeug.exceptions import default_exceptions
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask_sqlalchemy import SQLAlchemy
-from helpers import muscle_groups, t1name, login_required, apology, admin_required
+from helpers import muscle_groups, t1name, login_required, apology, admin_required, dump_datetime
 from datetime import datetime
 from sqlalchemy import and_, or_
 
@@ -78,6 +78,19 @@ class Exercise(db.Model):
         self.group2 = group2
         self.t = t
         self.user_id = user_id
+    
+    @property
+    def serialize(self):
+       """Return object data in easily serializeable format"""
+       return {
+           'id'     : self.id,
+           'name'   : self.name,
+           'group1' : self.group1,
+           'group2' : self.group2,
+           't'      : self.t,
+           'user_id': self.user_id,
+           'time'   : dump_datetime(self.time),
+       }
 
 class Suggestion(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -300,7 +313,10 @@ def button_pressed():
             "t": ex.t
         }])
     print(json_exs)
-    return json_exs
+    
+    json_test = jsonify(json_list=[i.serialize for i in exs])
+    print(json_test)
+    return json_test
     # return jsonify(exs)
     
 @app.route("/allex")
