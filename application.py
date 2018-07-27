@@ -2,7 +2,9 @@ import os
 import random
 from flask import Flask, flash, redirect, session, jsonify, render_template, request
 # from flask.ext.session import Session
-from flask_session import Session
+# from flask_session import Session
+# import redis
+# from helper_redis import RedisSession, RedisSessionInterface
 from tempfile import mkdtemp
 from werkzeug.exceptions import default_exceptions
 from werkzeug.security import check_password_hash, generate_password_hash
@@ -23,19 +25,21 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
 db = SQLAlchemy(app)
 #------------------------------------------
 
+app.secret_key = b'\x93\x9a\xfbPLD\xf7\xbf\x14v<\xcaP\x1fL\x94'
+
 # OPTION 1 ------ Configure Flask-Session
-SESSION_TYPE = 'redis'
-app.config.from_object(__name__)
-Session(app)
+# SESSION_TYPE = 'redis'
+# app.config.from_object(__name__)
+# Session(app)
 
-@app.route('/set/')
-def set():
-    session['key'] = 'value'
-    return 'ok'
+# @app.route('/set/')
+# def set():
+#     session['key'] = 'value'
+#     return 'ok'
 
-@app.route('/get/')
-def get():
-    return session.get('key', 'not set')
+# @app.route('/get/')
+# def get():
+#     return session.get('key', 'not set')
     
 # # OPTION 2 ---- Configure session to use filesystem (instead of signed cookies)
 # app.config["SESSION_FILE_DIR"] = mkdtemp()
@@ -223,7 +227,7 @@ def register():
 def index():
     """Render Main Page"""
     # Retrieve user's role to update the navbar
-    if session:
+    if "user_id" in session:
         user = User.query.get_or_404(session["user_id"])
         role = user.role
         # role = db.execute("SELECT role FROM users WHERE id = :id",
