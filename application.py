@@ -322,14 +322,11 @@ def suggestions():
     # ex_addsug = db.execute("SELECT * FROM suggestions WHERE replace_id IS NULL")
     
     ex_updatesug = Suggestion.query.filter(Suggestion.exercise_id != None)
-    ex_updatesug_it = [ex for ex in ex_updatesug]
-    print(ex_updatesug_it)
-    print(ex_updatesug.all())
+
     # ex_updatesug = db.execute("SELECT * FROM suggestions WHERE replace_id IS NOT NULL")
     ex_oldlist = []
-    for ex in ex_updatesug_it:
-        old_exs = Exercise.query.get(ex.exercise_id)
-        ex_oldlist.extend([old_ex for old_ex in old_ex])
+    for ex in ex_updatesug.all():
+        ex_oldlist.extend(Exercise.query.get(ex.exercise_id).all())
         # ex_oldlist.extend(db.execute("SELECT * FROM exercises WHERE id = :replace_id",
         #                              replace_id=ex["replace_id"]))
     # send the addition suggestions and a zip of update suggestions and their respective exercise to update
