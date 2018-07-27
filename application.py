@@ -226,14 +226,15 @@ def register():
 def index():
     """Render Main Page"""
     # Retrieve user's role to update the navbar
-    if "user_id" in session:
-        user = User.query.get_or_404(session["user_id"])
-        role = user.role
-        # role = db.execute("SELECT role FROM users WHERE id = :id",
-        #                   id=session["user_id"])
-        # role = role[0]["role"]
-    else:
-        role = None
+    # if "user_id" in session:
+    #     print("Found user")
+    #     user = User.query.get_or_404(session["user_id"])
+    #     role = user.role
+    #     # role = db.execute("SELECT role FROM users WHERE id = :id",
+    #     #                   id=session["user_id"])
+    #     # role = role[0]["role"]
+    # else:
+    #     role = None
 
     return render_template("index.html")
 
